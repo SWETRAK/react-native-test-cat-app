@@ -8,7 +8,6 @@ import {getFact} from "../services/HttpServcie";
 import {filter, map, take} from "rxjs";
 import i18n from "../translations/TranslationHelper";
 
-
 export const HomeScreen = () => {
 
     const navigation = useNavigation<StackNavigationProp<any>>();
