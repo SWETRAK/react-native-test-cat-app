@@ -5,9 +5,9 @@ import {createNativeStackNavigator} from "@react-navigation/native-stack";
 import {HomeScreen} from "./screens/HomeScreen";
 import {ProfileScreen} from "./screens/ProfileScreen";
 import {GlobalStyles} from "./GlobalStyles";
+import i18n from "./translations/TranslationHelper";
 
 export default function App(): Element {
-
     const Stack = createNativeStackNavigator<any>();
 
     return (
@@ -17,12 +17,12 @@ export default function App(): Element {
                     <Stack.Screen
                         name={"Home"}
                         options={{
-                            title: "Cat Facts on Demand",
+                            title: i18n.t<string>('catFactsOnDemandHeader'),
                             headerLargeTitle: true,
                             headerTitleStyle: {
                                 color: "#fff"
                             },
-                            headerBackTitle: "Back",
+                            headerBackTitle: i18n.t<string>('back'),
                             headerStyle: {
                                 backgroundColor: "red"
                             }
@@ -31,8 +31,8 @@ export default function App(): Element {
                     <Stack.Screen
                         name={"Profile"}
                         options={{
-                            title: "Cat for you ❤️❤️",
-                            headerBackTitle: "Back"
+                            title: i18n.t<string>('catForYouHeader'),
+                            headerBackTitle: i18n.t<string>('back')
                         }}
                         component={ProfileScreen}/>
                 </Stack.Navigator>

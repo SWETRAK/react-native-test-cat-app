@@ -6,6 +6,8 @@ import {Pressable, Text, View} from "react-native";
 import {GlobalStyles} from "../GlobalStyles";
 import {getFact} from "../services/HttpServcie";
 import {filter, map, take} from "rxjs";
+import i18n from "../translations/TranslationHelper";
+
 
 export const HomeScreen = () => {
 
@@ -46,16 +48,16 @@ export const HomeScreen = () => {
     return (
         <View style={GlobalStyles.container}>
             <View style={GlobalStyles.buttonOverlay}>
-                <Text style={GlobalStyles.factText}>{fact?.fact || "No fact for now"}</Text>
+                <Text style={GlobalStyles.factText}>{fact?.fact || i18n.t('noFact')}</Text>
             </View>
             <View style={GlobalStyles.buttonOverlay}>
                 <Pressable onPress={onLoadFactButtonPress} style={GlobalStyles.button}>
-                    <Text style={GlobalStyles.buttonText}>Load new fact 😜</Text>
+                    <Text style={GlobalStyles.buttonText}>{i18n.t('loadNewFact')}</Text>
                 </Pressable>
             </View>
             <View style={GlobalStyles.buttonOverlay}>
                 <Pressable onPress={onGoToNextPageButtonPress} style={GlobalStyles.button}>
-                    <Text style={GlobalStyles.buttonText}>Cat four you ➡️</Text>
+                    <Text style={GlobalStyles.buttonText}>{i18n.t('catForYou')}</Text>
                 </Pressable>
             </View>
         </View>

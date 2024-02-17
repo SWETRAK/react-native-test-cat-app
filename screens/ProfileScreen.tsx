@@ -4,6 +4,8 @@ import {RootStackNavigatorParamsList} from "../types/RootStackNavigatorParamsLis
 import React, {useEffect} from "react";
 import {Image, View, Text} from "react-native";
 import {GlobalStyles} from "../GlobalStyles";
+import i18n from "../translations/TranslationHelper";
+
 
 export const ProfileScreen = () => {
 
@@ -22,7 +24,7 @@ export const ProfileScreen = () => {
                 style={{width: '100%', height: '50%'}}
                 source={{uri: "https://i.guim.co.uk/img/media/26392d05302e02f7bf4eb143bb84c8097d09144b/446_167_3683_2210/master/3683.jpg?width=700&quality=85&auto=format&fit=max&s=fa2a6e634973defc13bfcbae1b8e954d"}}/>
 
-            <Text style={GlobalStyles.factText}>Kociak dla ciebie kochanie 😻😻</Text>
+            <Text style={GlobalStyles.factText}>{i18n.t<string>('catForYouMyLove')}</Text>
         </View>
     )
 }
