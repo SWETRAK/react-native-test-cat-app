@@ -55,7 +55,7 @@ export const HomeScreen = () => {
             </View>
             <View style={GlobalStyles.buttonOverlay}>
                 <Pressable onPress={onGoToNextPageButtonPress} style={GlobalStyles.button}>
-                    <Text style={GlobalStyles.buttonText}>Go to next page ➡️</Text>
+                    <Text style={GlobalStyles.buttonText}>Cat four you ➡️</Text>
                 </Pressable>
             </View>
         </View>
