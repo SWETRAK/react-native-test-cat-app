@@ -1,6 +1,6 @@
 import {StyleSheet} from "react-native";
 
-export const GlobalStyles = StyleSheet.create({
+const GlobalStyles = StyleSheet.create({
     wrapperContainer: {
         flex: 1,
     },
@@ -32,3 +32,5 @@ export const GlobalStyles = StyleSheet.create({
         fontSize: 20
     }
 });
+
+export default GlobalStyles;

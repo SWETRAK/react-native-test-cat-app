@@ -3,9 +3,8 @@ import {StackNavigationProp} from "@react-navigation/stack";
 import {RootStackNavigatorParamsList} from "../types/RootStackNavigatorParamsList";
 import React, {useEffect} from "react";
 import {Image, View, Text} from "react-native";
-import {GlobalStyles} from "../GlobalStyles";
+import GlobalStyles from "../GlobalStyles";
 import i18n from "../translations/TranslationHelper";
-
 
 export const ProfileScreen = () => {
 
@@ -28,4 +27,6 @@ export const ProfileScreen = () => {
         </View>
     )
 }
+
+export default ProfileScreen;
 
