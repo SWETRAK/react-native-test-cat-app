@@ -1,49 +1,77 @@
-import {Camera, CameraType, PermissionResponse} from 'expo-camera';
-import {useEffect, useState} from 'react';
-import {SafeAreaView, Text, TouchableOpacity, View} from 'react-native';
-import {from} from 'rxjs'
+import {CameraView, useCameraPermissions, FocusMode} from 'expo-camera';
+import {useState} from 'react';
+import {Button, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import GlobalStyles from "../GlobalStyles";
+import {AutoFocus, CameraType} from "expo-camera/legacy";
 
-const CameraView = () => {
-    const [type, setType] = useState(CameraType.back);
-    const [permission, requestPermission] = Camera.useCameraPermissions();
+const MyCameraView = () => {
 
-    useEffect(() => {
-
-        return () => {
-
-        }
-    }, []);
+    const [facing, setFacing] = useState(CameraType.back);
+    const [permission, requestPermission] = useCameraPermissions();
 
     if (!permission) {
-        // console.error("Camera permission not working");
+        // Camera permissions are still loading.
+        return <View />;
     }
 
-    if (!permission?.granted) {
-        from(requestPermission()).subscribe({
-            next: (value: PermissionResponse) => {
-                console.log(value);
-            },
-            error: (err: any) => {
-            }
-        })
-        // console.warn("Camera permission not granted")
+    if (!permission.granted) {
+        // Camera permissions are not granted yet.
+        return (
+          <View style={styles.container}>
+              <Text style={{ textAlign: 'center' }}>We need your permission to show the camera</Text>
+              <Button onPress={requestPermission} title="grant permission" />
+          </View>
+        );
     }
 
-    const toggleCameraType = () => setType(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+    function toggleCameraFacing() {
+        setFacing(current => (current === CameraType.back ? CameraType.front : CameraType.back));
+    }
 
 
     return (
         <SafeAreaView style={GlobalStyles.container}>
-            <Camera type={type} style={{flex: 1, width: "100%", height: "100%", alignItems: 'center', justifyContent: 'flex-end'}}>
-                <View style={{alignSelf: 'center'}}>
-                    <TouchableOpacity onPress={toggleCameraType}>
-                        <Text style={{color: '#fff'}}>Flip Camera</Text>
+            <CameraView
+              style={styles.camera}
+              facing={facing}
+              autofocus={AutoFocus.on}
+              mode={'video'}
+              enableTorch={true}>
+                <View style={styles.buttonContainer}>
+                    <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
+                        <Text style={styles.text}>Flip Camera</Text>
                     </TouchableOpacity>
                 </View>
-            </Camera>
+            </CameraView>
         </SafeAreaView>
     );
 }
 
-export default CameraView;
+const styles = StyleSheet.create({
+    container: {
+        flex: 1,
+        justifyContent: 'center',
+    },
+    camera: {
+        width: '100%',
+        flex: 1,
+    },
+    buttonContainer: {
+        flex: 1,
+        flexDirection: 'row',
+        backgroundColor: 'transparent',
+        margin: 64,
+    },
+    button: {
+        flex: 1,
+        alignSelf: 'flex-end',
+        alignItems: 'center',
+    },
+    text: {
+        fontSize: 24,
+        fontWeight: 'bold',
+        color: 'white',
+    },
+});
+
+export default MyCameraView;

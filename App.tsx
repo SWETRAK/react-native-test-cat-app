@@ -28,7 +28,7 @@ export default function App(): Element {
                                 backgroundColor: "red"
                             }
                         }}
-                        component={HomeScreen}/>
+                        component={HomeScreen} />
                     <Stack.Screen
                         name={"Profile"}
                         options={{

@@ -1,6 +1,7 @@
-import Axios, {AxiosObservable} from "axios-observable"
 import IFactDto from "../models/dto/IFactDto";
+import {Observable} from "rxjs";
+import {ajax, AjaxResponse} from "rxjs/ajax";
 
-export const getFact = (): AxiosObservable<IFactDto> => {
-    return Axios.get<IFactDto>("https://catfact.ninja/fact");
+export const getFact = (): Observable<AjaxResponse<IFactDto>> => {
+    return ajax.get<IFactDto>("https://catfact.ninja/fact");
 }
