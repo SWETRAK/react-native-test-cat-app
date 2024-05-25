@@ -1,10 +1,13 @@
-import {CameraView, useCameraPermissions, FocusMode} from 'expo-camera';
-import {useState} from 'react';
+import {CameraView, useCameraPermissions, FocusMode, CameraCapturedPicture} from 'expo-camera';
+import {useRef, useState} from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import GlobalStyles from "../GlobalStyles";
-import {AutoFocus, CameraType} from "expo-camera/legacy";
+import {AutoFocus, CameraType, ImageType} from "expo-camera/legacy";
+import {take} from "rxjs";
 
 const MyCameraView = () => {
+
+    const cameraViewRef = useRef<CameraView>(null);
 
     const [facing, setFacing] = useState(CameraType.back);
     const [permission, requestPermission] = useCameraPermissions();
@@ -24,10 +27,22 @@ const MyCameraView = () => {
         );
     }
 
-    function toggleCameraFacing() {
+    const toggleCameraFacing = () => {
         setFacing(current => (current === CameraType.back ? CameraType.front : CameraType.back));
     }
 
+    const takePicture = async (): Promise<void> => {
+        if (cameraViewRef.current !== null) {
+            const takePictureResult: CameraCapturedPicture | undefined = await cameraViewRef.current.takePictureAsync({
+                base64: true,
+                imageType: ImageType.jpg
+            });
+
+            if(takePictureResult) {
+                console.log(takePictureResult.base64);
+            }
+        }
+    }
 
     return (
         <SafeAreaView style={GlobalStyles.container}>
@@ -36,10 +51,14 @@ const MyCameraView = () => {
               facing={facing}
               autofocus={AutoFocus.on}
               mode={'video'}
-              enableTorch={true}>
+              enableTorch={true}
+              ref={cameraViewRef}>
                 <View style={styles.buttonContainer}>
                     <TouchableOpacity style={styles.button} onPress={toggleCameraFacing}>
                         <Text style={styles.text}>Flip Camera</Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={takePicture}>
+                        <Text style={styles.text}>Take Picture</Text>
                     </TouchableOpacity>
                 </View>
             </CameraView>
