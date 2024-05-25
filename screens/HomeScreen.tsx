@@ -7,16 +7,13 @@ import GlobalStyles from "../GlobalStyles";
 import i18n from "../translations/TranslationHelper";
 import TextLoader from "../components/TextLoader";
 import TextLoaderRow from "../components/TextLoaderRow";
-import * as Speech from 'expo-speech';
 import {getFact} from "../services/HttpServcie";
 import {filter, map, take} from "rxjs";
-import {NativeBoundaryEvent} from "expo-speech/build/Speech.types";
 
 const HomeScreen = () => {
 
     const navigation = useNavigation<StackNavigationProp<any>>();
     const [fact, setFact] = useState<IFactDto | null>(null);
-    const [speechPercentage, setSpeechPercentage] = useState<number | null>(null);
 
     useEffect(() => {
         // Code here will be executed on component mount
@@ -44,33 +41,8 @@ const HomeScreen = () => {
     const onLoadFactButtonPress = (): void => getFactFromApi();
     const onGoToNextPageButtonPress = (): void => navigation.navigate("Profile");
     const onGoToCameraPageButtonPressed = (): void => navigation.navigate("Camera");
-
-    const speak = async (languageCode: string, textToSpeech: string): Promise<void> => {
-
-        const availableVoices = await Speech.getAvailableVoicesAsync();
-        const languageVoices = availableVoices.filter(s => s.language === languageCode);
-
-        const textLength = textToSpeech.length;
-
-        Speech.speak(textToSpeech, {
-            language: languageCode,
-            voice: languageVoices[0].identifier,
-            onBoundary: (data: NativeBoundaryEvent) => {
-                setSpeechPercentage(data.charIndex / textLength * 100);
-            },
-            onDone: () => {
-                setSpeechPercentage(100);
-            }
-        });
-    };
-
-    const speechPause = async (): Promise<void> => {
-        await Speech.pause();
-    }
-
-    const speechResume = async (): Promise<void> => {
-        await Speech.resume();
-    }
+    const onGoToMapPageButtonPressed = (): void => navigation.navigate("Map");
+    const onGoToSpeechPageButtonPressed = (): void => navigation.navigate("Speech");
 
     return (
         <View style={GlobalStyles.container}>
@@ -102,33 +74,19 @@ const HomeScreen = () => {
 
             <View style={GlobalStyles.buttonOverlay}>
                 <Pressable onPress={onGoToCameraPageButtonPressed} style={GlobalStyles.button}>
-                    <Text style={GlobalStyles.buttonText}>Camera</Text>
+                    <Text style={GlobalStyles.buttonText}>{i18n.t("camera")}</Text>
                 </Pressable>
             </View>
 
             <View style={GlobalStyles.buttonOverlay}>
-              <Pressable
-                onPress={async () => {
-                  await speak("pl-PL", "Brawa dla Dominika");
-                 }}
-                style={GlobalStyles.button}>
-                <Text style={GlobalStyles.buttonText}>Mów    {Math.round(speechPercentage!)}</Text>
-              </Pressable>
-            </View>
-
-            <View style={GlobalStyles.buttonOverlay}>
-                <Pressable
-                  onPress={speechPause}
-                  style={GlobalStyles.button}>
-                    <Text style={GlobalStyles.buttonText}>Pause</Text>
+                <Pressable onPress={onGoToMapPageButtonPressed} style={GlobalStyles.button}>
+                    <Text style={GlobalStyles.buttonText}>{i18n.t("map")}</Text>
                 </Pressable>
             </View>
 
             <View style={GlobalStyles.buttonOverlay}>
-                <Pressable
-                  onPress={speechResume}
-                  style={GlobalStyles.button}>
-                    <Text style={GlobalStyles.buttonText}>Play</Text>
+                <Pressable onPress={onGoToSpeechPageButtonPressed} style={GlobalStyles.button}>
+                    <Text style={GlobalStyles.buttonText}>{i18n.t("goToSpeechPageButtonText")}</Text>
                 </Pressable>
             </View>
 

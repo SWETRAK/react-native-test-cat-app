@@ -7,7 +7,10 @@ const enI18n: ITranslationDictionary = {
     catForYouMyLove: "Cat for you my love 🥰",
     catFactsOnDemandHeader: "Cat facts on demand",
     catForYouHeader: "Cat for you ❤️",
-    noFact: "No fact for now"
+    noFact: "No fact for now",
+    camera: "Camera",
+    map: "Map",
+    goToSpeechPageButtonText: "Speech"
 }
 
 export default enI18n;

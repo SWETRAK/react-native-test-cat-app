@@ -7,6 +7,8 @@ import ProfileScreen from "./screens/ProfileScreen";
 import GlobalStyles from "./GlobalStyles";
 import i18n from "./translations/TranslationHelper";
 import CameraScreen from "./screens/CameraScreen";
+import MapScreen from "./screens/MapScreen";
+import SpeechScreen from "./screens/SpeechScreen";
 
 export default function App(): Element {
     const Stack = createNativeStackNavigator<any>();
@@ -43,6 +45,21 @@ export default function App(): Element {
                             headerBackTitle: i18n.t<string>('back')
                         }}
                         component={CameraScreen}/>
+                    <Stack.Screen
+                      name={"Map"}
+                      options={{
+                          title: i18n.t<string>('catForYouHeader'),
+                          headerBackTitle: i18n.t<string>('back')
+                      }}
+                      component={MapScreen}/>
+
+                    <Stack.Screen
+                      name={"Speech"}
+                      options={{
+                          title: i18n.t<string>('catForYouHeader'),
+                          headerBackTitle: i18n.t<string>('back')
+                      }}
+                      component={SpeechScreen}/>
                 </Stack.Navigator>
             </NavigationContainer>
         </View>

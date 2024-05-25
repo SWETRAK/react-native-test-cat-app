@@ -5,5 +5,8 @@ export default interface ITranslationDictionary {
     catForYouMyLove: string,
     catFactsOnDemandHeader: string,
     catForYouHeader: string,
-    noFact: string
+    noFact: string,
+    camera: string,
+    map: string,
+    goToSpeechPageButtonText: string
 }

@@ -7,7 +7,10 @@ const plI18n: ITranslationDictionary = {
     catForYouMyLove: "Kociak dla ciebie kochanie 🥰",
     catFactsOnDemandHeader: "Kocie fakty na żądanie",
     catForYouHeader: "Kociak dla ciebie ❤️",
-    noFact: "Brak faktu na dzisiaj"
+    noFact: "Brak faktu na dzisiaj",
+    camera: "Kamera",
+    map: "Mapa",
+    goToSpeechPageButtonText: "Speech"
 }
 
 export default plI18n;
