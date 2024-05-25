@@ -24,6 +24,7 @@ const HomeScreen = () => {
     }, [])
 
     const getFactFromApi = (): void => {
+        setFact(null);
         getFact()
             .pipe(take(1))
             .pipe(filter(ev => ev.status === 200))

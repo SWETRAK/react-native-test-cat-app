@@ -7,7 +7,7 @@ import {
 import {CameraType, ImageType} from "expo-camera/legacy";
 import {useEffect, useRef, useState} from 'react';
 import {Button, SafeAreaView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
-import {Ionicons} from "@expo/vector-icons";
+import {Ionicons, MaterialCommunityIcons} from "@expo/vector-icons";
 import GlobalStyles from "../GlobalStyles";
 
 const MyCameraView = () => {
@@ -46,6 +46,7 @@ const MyCameraView = () => {
             const startRecordingResult: {uri: string} | undefined = await cameraViewRef.current.recordAsync({});
             if (startRecordingResult !== undefined) {
                 setRecordingUri(startRecordingResult.uri);
+                console.log(startRecordingResult.uri);
             }
         }
     }
@@ -54,6 +55,7 @@ const MyCameraView = () => {
         if (cameraViewRef.current !== null) {
             cameraViewRef.current.stopRecording();
 
+            console.log("Tested");
             // THERE you can sand video and other files
         }
     }
@@ -88,6 +90,12 @@ const MyCameraView = () => {
                     </TouchableOpacity>
                     <TouchableOpacity style={styles.button} onPress={onTakePicture}>
                         <Ionicons name="camera" size={24} color="#fff" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={onStartRecording}>
+                        <MaterialCommunityIcons name="record" size={24} color="#fff" />
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.button} onPress={onStopRecording}>
+                        <Ionicons name="pause" size={24} color="#fff" />
                     </TouchableOpacity>
                 </View>
             </CameraView>
