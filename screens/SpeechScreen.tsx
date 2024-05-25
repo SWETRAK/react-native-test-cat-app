@@ -1,6 +1,5 @@
 import React, {useEffect, useState} from "react";
 import {
-    Animated,
     DimensionValue,
     Pressable,
     SafeAreaView,
@@ -22,7 +21,7 @@ const MySpeechScreen = () => {
     useEffect(() => {
 
         return () => {
-
+            Speech.stop().then();
         }
     },  []);
 
@@ -79,7 +78,7 @@ const MySpeechScreen = () => {
                           if (isAlreadyPlaying) {
                               await speechResume();
                           } else {
-                              await speak("pl-PL", "Brawa dla Dominika");
+                              await speak("pl-PL", "Oko trę, że mam ból Taki los komu żal? oko trę, pali sól O madame, kulą wal Ile trosk, ile burz, a (ma) krew kipi, wre, O madame, oto nóż O, madame, oto mrę");
                           }
                       }}>
                           <Ionicons name="play" size={24}></Ionicons>
@@ -99,7 +98,7 @@ const MySpeechScreen = () => {
           <View style={GlobalStyles.buttonOverlay}>
               <Pressable
                 onPress={async () => {
-                    await speak("pl-PL", "Brawa dla Dominika");
+                    await speak("pl-PL", "Oko trę, że mam ból Taki los komu żal? oko trę, pali sól O madame, kulą wal Ile trosk, ile burz, a (ma) krew kipi, wre, O madame, oto nóż O, madame, oto mrę");
                 }}
                 style={GlobalStyles.button}>
                   <Text style={GlobalStyles.buttonText}>Play</Text>
